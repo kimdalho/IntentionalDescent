@@ -1,3 +1,5 @@
+<div align="left">
+
 # Intentional Descent
 
 ## 📖 **프로젝트 개요**
