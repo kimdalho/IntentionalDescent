@@ -10,6 +10,9 @@ Unity의 **High Definition Render Pipeline (HDRP)**를 활용하여 몰입감 �
 
 ## 🎮 **주요 특징**
 1. **멀티플레이 게임플레이**: 최대 8명의 플레이어가 참가, 생존자와 배신자로 역할이 나뉩니다.
+![실시간 멀티 플레이 테스트](https://github.com/user-attachments/assets/5c765f35-8a6d-467b-9791-7141dfd1c3c2)
+
+
 2. **생존자 목표**:
    - 외계 행성에 흩어진 자원을 모으기.
    - 우주선을 수리하고 시간 내에 탈출하기.
