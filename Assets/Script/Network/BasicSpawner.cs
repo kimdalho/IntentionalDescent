@@ -4,9 +4,18 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class BasicSpawner : MonoBehaviour ,INetworkRunnerCallbacks
 {
+
+    [SerializeField] private Image background;
+
+    //생성될 플레이어 프리펩
+    [SerializeField] private NetworkPrefabRef _playerPrefab;
+    
+    private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
+
     public void OnConnectedToServer(NetworkRunner runner)
     {
 
@@ -82,6 +91,8 @@ public class BasicSpawner : MonoBehaviour ,INetworkRunnerCallbacks
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
+            // Hide Ui
+            background.gameObject.SetActive(false);
         }
     }
 
@@ -98,8 +109,6 @@ public class BasicSpawner : MonoBehaviour ,INetworkRunnerCallbacks
     //######################################아바타 생성#####################################//
 
 
-    [SerializeField] private NetworkPrefabRef _playerPrefab;
-    private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
 
 
     public void OnReliableDataProgress(NetworkRunner runner, PlayerRef player, ReliableKey key, float progress)
@@ -153,8 +162,6 @@ public class BasicSpawner : MonoBehaviour ,INetworkRunnerCallbacks
 
     }
 
-    void Awake() => Screen.SetResolution(1920, 1080, false);
-
 
     async void StartGame(GameMode mode)
     {
@@ -170,12 +177,16 @@ public class BasicSpawner : MonoBehaviour ,INetworkRunnerCallbacks
             sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
         }
 
+
+
         // Start or join (depends on gamemode) a session with a specific name
         await _runner.StartGame(new StartGameArgs()
         {
             GameMode = mode,
             SessionName = "TestRoom",
             Scene = scene,
+            PlayerCount = 10,
+           
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
         });
     }
