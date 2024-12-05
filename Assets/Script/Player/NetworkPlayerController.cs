@@ -6,11 +6,14 @@ public class NetworkPlayerController : NetworkBehaviour
     [Header("카메라 초기 위치")]
     [SerializeField]
     private Vector3 CameraLocalPosition;
+    [SerializeField]
+    private int CameraLocaleulerAnglesX;
 
     public override void OnStartLocalPlayer()
     {
         Camera.main.transform.SetParent(transform);
         Camera.main.transform.localPosition = CameraLocalPosition;
+        Camera.main.transform.eulerAngles = new Vector3(-CameraLocaleulerAnglesX, 0, 0); ;
     }
 
     [Header("Y축 각도 제한")]

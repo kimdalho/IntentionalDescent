@@ -465,7 +465,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4544494426123234526}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 9f078227c6f09b54392514bfaa25c741, type: 3}
   m_Controller: {fileID: 9100000, guid: 8d768eb13b0d828499c28e49fab416da, type: 2}
   m_CullingMode: 1
@@ -544,8 +544,8 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  CameraLocalPosition: {x: 0, y: 3.5, z: -4}
-  CameraLocalAngle: {x: 40, y: 0, z: 0}
+  CameraLocalPosition: {x: 0, y: 1, z: -4}
+  CameraLocaleulerAnglesX: 0
   minY: -45
   maxY: 45
   sensitivityX: 100
