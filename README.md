@@ -42,6 +42,6 @@ Robby
 2. 방을 새로 만들어 호스트가 될지 다른방의 접속하는 클라이언트가 될지 선택한다.
    - 방을 선택할 경우 해당 호스트의 ip주소를 입력해야만한다 port(7777)
    - 
-![자료2](https://github.com/user-attachments/assets/e57cf36a-3e2d-4389-8c7b-f1e2bcfa1138)
+![녹화_2024_12_07_01_55_01_323](https://github.com/user-attachments/assets/b16c34e5-73ab-43da-aa23-3657c34e7d0c)
 
 ---
