@@ -7,7 +7,6 @@ using Mirror;
 public class IDNetworkRoomManager : NetworkRoomManager
 {
 
-
     bool showStartButton;
     public override void OnRoomServerPlayersReady()
     {
@@ -20,6 +19,17 @@ public class IDNetworkRoomManager : NetworkRoomManager
         {
             showStartButton = true;
         }
+    }
+
+    //서버에서 새로 접속한 클라이언트를 감지
+    public override void OnRoomServerConnect(NetworkConnectionToClient conn)
+    {
+        base.OnRoomServerConnect(conn);
+
+        //새로 들어올때마다 스폰프리펩에서 생성
+        //var player = Instantiate(spawnPrefabs[0]);
+        //NetworkServer.Spawn(player);
+        
     }
 
     //GUI 스타트 버튼

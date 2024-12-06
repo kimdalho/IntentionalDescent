@@ -5,6 +5,13 @@ using TMPro;
 public class MenuManager : MonoBehaviour
 {
     static public MenuManager instance;
+    [Header("닉네임")]
+    [SerializeField]
+    private Image Panel_Nickname;
+    [SerializeField]
+    private TMP_InputField inputField_NickName;
+    [SerializeField]
+    private Button Btn_Confirm;
 
     [Header("메인 메뉴")]
     [SerializeField]
@@ -19,14 +26,14 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private Image Panel_Join;
     [SerializeField]
-    private TMP_InputField inputField_NickName;
-    [SerializeField]
     private TMP_InputField inputField_RoomName;
     [SerializeField]
     private Button Btn_RoomJoin;
     [SerializeField]
     private Button Btn_Back;
 
+    [SerializeField]
+    public string playerName;
 
 
     //캐싱
@@ -42,6 +49,8 @@ public class MenuManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        //닉네임
+        Btn_Confirm.onClick.AddListener(OnClickConfirm);
 
         //메인메뉴
         Btn_CreateRoom.onClick.AddListener(OnClickButtonCreateRoom);
@@ -58,6 +67,16 @@ public class MenuManager : MonoBehaviour
         roomManager = IDNetworkRoomManager.singleton;
     }
 
+    private void OnClickConfirm()
+    {
+        if (inputField_NickName.text != "")
+        {
+            playerName = inputField_NickName.text;
+            Panel_Main.gameObject.SetActive(true);
+            Panel_Nickname.gameObject.SetActive(false);
+        }
+    }
+
     private void OnClickButtonCreateRoom()
     {
         
@@ -71,6 +90,7 @@ public class MenuManager : MonoBehaviour
         }
         
     }
+    
 
     private void OnClickButtonJoinMenu()
     {
