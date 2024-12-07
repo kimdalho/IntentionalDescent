@@ -453,7 +453,8 @@ MonoBehaviour:
   playerPrefab: {fileID: 4544494426123234526, guid: 2e41f152f160b1343a9b14107bd06e47, type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 8649510114675928252, guid: 550584758bbb9b944b59922ba5ff8443, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -2942,7 +2943,7 @@ GameObject:
   - component: {fileID: 1850040694}
   - component: {fileID: 1850040693}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SceneSetting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,6 +8,7 @@ public class IDNetworkRoomManager : NetworkRoomManager
 {
 
     bool showStartButton;
+
     public override void OnRoomServerPlayersReady()
     {
         // calling the base method calls ServerChangeScene as soon as all players are in Ready state.
@@ -25,12 +26,16 @@ public class IDNetworkRoomManager : NetworkRoomManager
     public override void OnRoomServerConnect(NetworkConnectionToClient conn)
     {
         base.OnRoomServerConnect(conn);
-
-        //새로 들어올때마다 스폰프리펩에서 생성
-        //var player = Instantiate(spawnPrefabs[0]);
-        //NetworkServer.Spawn(player);
-        
     }
+    public override void OnRoomClientSceneChanged()
+    {
+        base.OnRoomClientSceneChanged();
+
+
+    }
+
+
+    //public override void OnHost
 
     //GUI 스타트 버튼
     public override void OnGUI()
