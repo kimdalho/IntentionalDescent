@@ -477,6 +477,7 @@ MonoBehaviour:
   GameplayScene: Assets/Scenes/GameScene.unity
   _allPlayersReady: 0
   clientIndex: 0
+  playerName: 
 --- !u!114 &158345046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3862,7 +3863,6 @@ MonoBehaviour:
   inputField_RoomName: {fileID: 1885642321}
   Btn_RoomJoin: {fileID: 105149453}
   Btn_Back: {fileID: 938658684}
-  playerName: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

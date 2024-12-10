@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 7032632048813468017}
   - component: {fileID: 3944374797833285821}
   m_Layer: 5
-  m_Name: Nickname
+  m_Name: TMP_Nickname
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 8239511445819999943}
   - component: {fileID: 5328687399692803604}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: TMP_Ready
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -209.19066, w: -45.560745}
+  m_margin: {x: 0, y: 0, z: -17.322891, w: -11.386124}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

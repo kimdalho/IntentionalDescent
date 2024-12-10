@@ -8,7 +8,7 @@ public class IDNetworkRoomManager : NetworkRoomManager
 {
 
     bool showStartButton;
-
+    public string playerName;
     public override void OnRoomServerPlayersReady()
     {
         // calling the base method calls ServerChangeScene as soon as all players are in Ready state.

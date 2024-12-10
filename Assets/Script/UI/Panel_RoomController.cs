@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Mirror;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class Panel_RoomController : MonoBehaviour
@@ -10,10 +11,12 @@ public class Panel_RoomController : MonoBehaviour
 
     public Button btn_RoomExit;
 
+
     private void Start()
     {
         Btn_Ready.onClick.AddListener(OnClickReady);
         btn_RoomExit.onClick.AddListener(OnClickRoomExit);
+        
     }
 
 
@@ -31,16 +34,14 @@ public class Panel_RoomController : MonoBehaviour
 
                 if (player.readyToBegin)
                 {
-                    Debug.Log("레디 취소");
                     player.CmdChangeReadyState(false);
-                    localPlayerView.Text_ReadyState.text = "Cancel";
+                    idPlayer.CmdChangeReadyText("Cancel");
 
                 }
                 else
                 {
-                    Debug.Log("레디!");
                     player.CmdChangeReadyState(true);
-                    localPlayerView.Text_ReadyState.text = "Ready!";
+                    idPlayer.CmdChangeReadyText("Ready");                   
                 }
             }
         }   
@@ -59,4 +60,5 @@ public class Panel_RoomController : MonoBehaviour
         }
         NetworkManager.singleton.StopHost();
     }
+      
 }
