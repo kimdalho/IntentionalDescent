@@ -32,12 +32,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private Button Btn_Back;
 
-    [SerializeField]
-    public string playerName;
-
-
     //Ä³½Ì
-    private NetworkManager roomManager;
+    private IDNetworkRoomManager roomManager;
 
     private void Awake()
     {
@@ -64,14 +60,14 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        roomManager = IDNetworkRoomManager.singleton;
+        roomManager = IDNetworkRoomManager.singleton as IDNetworkRoomManager;
     }
 
     private void OnClickConfirm()
     {
         if (inputField_NickName.text != "")
         {
-            playerName = inputField_NickName.text;
+            roomManager.playerName = inputField_NickName.text;
             Panel_Main.gameObject.SetActive(true);
             Panel_Nickname.gameObject.SetActive(false);
         }

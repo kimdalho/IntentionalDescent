@@ -417,7 +417,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158345042}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
   m_Name: 
@@ -452,8 +452,9 @@ MonoBehaviour:
   authenticator: {fileID: 0}
   playerPrefab: {fileID: 4544494426123234526, guid: 2e41f152f160b1343a9b14107bd06e47, type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
-  spawnPrefabs: []
+  playerSpawnMethod: 1
+  spawnPrefabs:
+  - {fileID: 8649510114675928252, guid: 550584758bbb9b944b59922ba5ff8443, type: 3}
   exceptionsDisconnect: 1
   snapshotSettings:
     bufferTimeMultiplier: 2
@@ -469,13 +470,14 @@ MonoBehaviour:
   evaluationMethod: 0
   evaluationInterval: 3
   timeInterpolationGui: 0
-  showRoomGUI: 1
+  showRoomGUI: 0
   minPlayers: 1
   roomPlayerPrefab: {fileID: 653406490351764759, guid: 0ca31b931c8f21f4588e78c063852fca, type: 3}
   RoomScene: Assets/Scenes/RoomScene.unity
   GameplayScene: Assets/Scenes/GameScene.unity
   _allPlayersReady: 0
   clientIndex: 0
+  playerName: 
 --- !u!114 &158345046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,8 +1019,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c6b646e9f76cde14fafd03ed57b75826, type: 2}
+  m_sharedMaterial: {fileID: 1791638716700392069, guid: c6b646e9f76cde14fafd03ed57b75826, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2731,10 +2733,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Confirm
+  m_text: "\uD655\uC778"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c6b646e9f76cde14fafd03ed57b75826, type: 2}
+  m_sharedMaterial: {fileID: 1791638716700392069, guid: c6b646e9f76cde14fafd03ed57b75826, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2758,10 +2760,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
+  m_fontSize: 72
   m_fontSizeBase: 24
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
@@ -2942,7 +2944,7 @@ GameObject:
   - component: {fileID: 1850040694}
   - component: {fileID: 1850040693}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SceneSetting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3593,8 +3595,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c6b646e9f76cde14fafd03ed57b75826, type: 2}
+  m_sharedMaterial: {fileID: 1791638716700392069, guid: c6b646e9f76cde14fafd03ed57b75826, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3861,7 +3863,6 @@ MonoBehaviour:
   inputField_RoomName: {fileID: 1885642321}
   Btn_RoomJoin: {fileID: 105149453}
   Btn_Back: {fileID: 938658684}
-  playerName: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

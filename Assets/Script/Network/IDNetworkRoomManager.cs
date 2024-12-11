@@ -1,13 +1,14 @@
 using UnityEngine;
 using Mirror;
-
 /// <summary>
 /// 
 /// </summary>
 public class IDNetworkRoomManager : NetworkRoomManager
 {
-
     bool showStartButton;
+
+    //이렇게 써도 괜찮은가..
+    public string playerName;
     public override void OnRoomServerPlayersReady()
     {
         // calling the base method calls ServerChangeScene as soon as all players are in Ready state.
@@ -21,28 +22,33 @@ public class IDNetworkRoomManager : NetworkRoomManager
         }
     }
 
-    //서버에서 새로 접속한 클라이언트를 감지
-    public override void OnRoomServerConnect(NetworkConnectionToClient conn)
+    public override void OnServerAddPlayer(NetworkConnectionToClient conn)
     {
-        base.OnRoomServerConnect(conn);
+        base.OnServerAddPlayer(conn);
 
-        //새로 들어올때마다 스폰프리펩에서 생성
-        //var player = Instantiate(spawnPrefabs[0]);
-        //NetworkServer.Spawn(player);
-        
+        Debug.Log($"지금 몇명있냐 {roomSlots.Count}");
     }
 
-    //GUI 스타트 버튼
-    public override void OnGUI()
+
+    /// <summary>
+    /// 서버에서 호출되어 처리되고 클라와 동기화한다.
+    /// </summary>
+    /// <param name="conn"></param>
+    public override void OnRoomServerDisconnect(NetworkConnectionToClient conn)
     {
-        base.OnGUI();
+        base.OnRoomServerDisconnect(conn);
 
-        if (allPlayersReady && showStartButton && GUI.Button(new Rect(150, 300, 120, 20), "START GAME"))
+        IDNetworkRoomPlayer roomPlayer = conn.identity.GetComponent<IDNetworkRoomPlayer>();
+        Destroy(roomPlayer.RoomPlayerHud);
+    }
+
+    public void GameStart()
+    {
+        if(allPlayersReady)
         {
-            // set to false to hide it in the game scene
             showStartButton = false;
-
             ServerChangeScene(GameplayScene);
         }
+        
     }
 }
