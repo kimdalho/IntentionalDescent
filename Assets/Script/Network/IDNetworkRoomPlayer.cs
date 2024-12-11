@@ -9,10 +9,11 @@ public class IDNetworkRoomPlayer : NetworkRoomPlayer
     [SyncVar(hook = nameof(PlayerDisplayNameChanged))]
     public string playerDisplayName;
 
-    public GameObject playerCard;
+    public GameObject RoomPlayerHud;
 
     [SyncVar(hook = nameof(ReadyTextChanged))]
     public string ReadyText;
+
 
     //hook 프로퍼티 설명
     //싱크바로 동기화된 변수가 서버에서 변경되었을때
@@ -23,31 +24,39 @@ public class IDNetworkRoomPlayer : NetworkRoomPlayer
 
     private IDNetworkRoomManager roomManager;
 
+    private void Awake()
+    {
+        roomManager = IDNetworkRoomManager.singleton as IDNetworkRoomManager;
+    }
+
     public override void Start()
     {
         base.Start();
         CreatePlayer();
     }
 
-    
     public void CreatePlayer()
     {
-        roomManager = IDNetworkRoomManager.singleton as IDNetworkRoomManager;
-        playerCard = Instantiate(roomManager.spawnPrefabs[0]);
+        RoomPlayerHud = Instantiate(roomManager.spawnPrefabs[0]);
 
-        foreach (NetworkRoomPlayer player in roomManager.roomSlots)
+        foreach (IDNetworkRoomPlayer player in roomManager.roomSlots)
         {
             if (player != null)
             {
+                player.transform.position = Panel_Room.Instance.roomPlayerRoot[player.index].position;
+                
                 var panel_RoomTransfrom = Panel_Room.Instance.panel_PlayerHolder.GetTransformByIndex(player.index);
-                playerCard.transform.SetParent(panel_RoomTransfrom, false);
+                RoomPlayerHud.transform.SetParent(panel_RoomTransfrom, false);
+                RoomPlayerHud.GetComponent<IRoomPlayerHudService>().SetActiveHostRedDot(false);    
+
+                if(player.index == 0)
+                {
+                    player.RoomPlayerHud.GetComponent<IRoomPlayerHudService>().SetActiveHostRedDot(true);
+                }
             }
         }
-
         CmdChangeNickNameText(roomManager.playerName);
     }
-
-
 
     //Command 프로퍼티 설명
     //클라이언트에서 커맨드 프로퍼티가 붙은 함수를 호출하면
@@ -65,20 +74,11 @@ public class IDNetworkRoomPlayer : NetworkRoomPlayer
         Panel_Room.Instance.roomChatService.SendChatMessage(newText);
     }
 
-
-    //호스트에서만 호출된다.(Cmd)
-    //public override void OnClientExitRoom()
-    //{
-    //    base.OnClientEnterRoom();
-    //}
-
-
     [Command]
     public void CmdChangeNickNameText(string Text)
     {
         playerDisplayName = Text;
     }
-
 
     [Command]
     public void CmdChangeReadyText(string Text)
@@ -87,28 +87,27 @@ public class IDNetworkRoomPlayer : NetworkRoomPlayer
     }
 
     //Hook
-
     public void PlayerDisplayNameChanged(string oldText, string newText)
     {
-        var localPlayerView = playerCard.GetComponent<Panel_PlayerView>();
-        localPlayerView.Text_NickName.text = newText;
-
-
-        foreach (NetworkRoomPlayer player in roomManager.roomSlots)
+        foreach (IDNetworkRoomPlayer idPlayer in roomManager.roomSlots)
         {
-            if (player != null && player.isLocalPlayer == false)
+            if (idPlayer != null && idPlayer.isLocalPlayer == false)
             {
-                var idPlayer = player as IDNetworkRoomPlayer;
-                var OtherPlayerView = idPlayer.playerCard.GetComponent<Panel_PlayerView>();
-                OtherPlayerView.Text_NickName.text = idPlayer.playerDisplayName;
+                var OtherRoomPlayerHud = idPlayer.RoomPlayerHud.GetComponent<IRoomPlayerHudService>();
+                OtherRoomPlayerHud.SetTMPNickNameText(idPlayer.playerDisplayName);
+            }
+            else if(idPlayer != null && idPlayer.isLocalPlayer == true)
+            {
+                var localRoomPlayerHud = this.RoomPlayerHud.GetComponent<IRoomPlayerHudService>();
+                localRoomPlayerHud.SetTMPNickNameText(newText);
             }
         }
     }
 
     public void ReadyTextChanged(string oldText, string newText) 
     {
-       var localPlayerView =  playerCard.GetComponent<Panel_PlayerView>();
-       localPlayerView.Text_ReadyState.text = newText;
+       var localPlayerView =  RoomPlayerHud.GetComponent<IRoomPlayerHudService>();
+       localPlayerView.SetTMPReadyText(newText);
     }
 
 }

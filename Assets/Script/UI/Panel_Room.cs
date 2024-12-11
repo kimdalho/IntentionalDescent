@@ -8,6 +8,8 @@ public class Panel_Room : MonoBehaviour
     
     public IRoomChatService roomChatService;
 
+    public Transform[] roomPlayerRoot;
+
     [SerializeField]
     private Panel_RoomChat panel_RoomChat;
 

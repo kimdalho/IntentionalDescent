@@ -36,7 +36,7 @@ public class Panel_RoomController : MonoBehaviour
             if (player != null && player.isLocalPlayer)
             {
                 var idPlayer = player as IDNetworkRoomPlayer;
-                var localPlayerView = idPlayer.playerCard.GetComponent<Panel_PlayerView>();
+                var localPlayerView = idPlayer.RoomPlayerHud.GetComponent<Panel_RoomPlayerHud>();
                 
 
                 if (idPlayer.readyToBegin)

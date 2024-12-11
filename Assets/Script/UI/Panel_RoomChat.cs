@@ -29,7 +29,7 @@ public class Panel_RoomChat : MonoBehaviour , IRoomChatService
                 if (player != null && player.isLocalPlayer)
                 {
                     var idPlayer = player as IDNetworkRoomPlayer;
-                    var localPlayerView = idPlayer.playerCard.GetComponent<Panel_PlayerView>();
+                    var localPlayerView = idPlayer.RoomPlayerHud.GetComponent<Panel_RoomPlayerHud>();
 
                     idPlayer.PostChat(idPlayer.playerDisplayName, input_chat.text);
                     input_chat.text = string.Empty;

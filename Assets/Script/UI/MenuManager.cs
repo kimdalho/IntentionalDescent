@@ -32,10 +32,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private Button Btn_Back;
 
-
-
-
-
     //Ä³½Ì
     private IDNetworkRoomManager roomManager;
 
