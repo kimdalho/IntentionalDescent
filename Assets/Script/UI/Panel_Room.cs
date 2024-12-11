@@ -1,15 +1,15 @@
-using TMPro;
 using UnityEngine;
 
 public class Panel_Room : MonoBehaviour
 {
     public static Panel_Room Instance;
 
-    public TMP_InputField input;
     public GameObject panel_PlayerView;
-    public GameObject chatBox;
-    public GameObject viewport;
+    
+    public IRoomChatService roomChatService;
 
+    [SerializeField]
+    private Panel_RoomChat panel_RoomChat;
 
 
     private void Awake()
@@ -22,5 +22,8 @@ public class Panel_Room : MonoBehaviour
         {
             Instance = this;
         }
+
+        roomChatService = panel_RoomChat.GetComponent<IRoomChatService>();
+
     }
 }

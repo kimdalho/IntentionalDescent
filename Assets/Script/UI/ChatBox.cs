@@ -4,17 +4,12 @@ using Mirror;
 using UnityEngine.UI;
 public class ChatBox : NetworkBehaviour
 {
-
-    public void Setup()
-    {
-        this.gameObject.transform.SetParent(Panel_Room.Instance.viewport.transform);
-    }
     [SerializeField]
-    public TextMeshProUGUI textMeshPro;
+    private TextMeshProUGUI textMeshPro;
 
-    public void SetText(string name, string text)
+    public void SetText(string text)
     {
-        textMeshPro.text = $"{name} : {text}";
+        textMeshPro.text = text;
     }
 
 }

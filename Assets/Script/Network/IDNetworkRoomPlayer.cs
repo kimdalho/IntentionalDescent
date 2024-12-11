@@ -14,9 +14,9 @@ public class IDNetworkRoomPlayer : NetworkRoomPlayer
     public string ReadyText;
 
     //hook 프로퍼티 설명
-    //동기화될 데이터가 수정될 경우
-    //클라이언트에서 호출될 함수를 정의한다.
-    //해당 함수는 호스트 또한 호출된다.
+    //싱크바로 동기화된 변수가 서버에서 변경되었을때
+    //클라이언트에서 호출되게하는 함수입니다.
+
     [SyncVar(hook = nameof(ChatTextChanged))]
     public string chatText;
 
@@ -57,16 +57,11 @@ public class IDNetworkRoomPlayer : NetworkRoomPlayer
 
     private void ChatTextChanged(string oldText, string newText)
     {
-        GameObject newBox = Instantiate(Panel_Room.Instance.chatBox);
-        newBox.GetComponent<ChatBox>().Setup();
-        newBox.GetComponent<ChatBox>().textMeshPro.text = newText;
+        //GameObject newBox = Instantiate(Panel_Room.Instance.chatBox);
+        //newBox.GetComponent<ChatBox>().Setup();
+        //newBox.GetComponent<ChatBox>().textMeshPro.text = newText;
+        Panel_Room.Instance.roomChatService.SendChatMessage(newText);
     }
-
-
-
-    //hook
-    //싱크바로 동기화된 변수가 서버에서 변경되었을때
-    //클라이언트에서 호출되게하는 함수입니다.
 
     public override void OnClientExitRoom()
     {
