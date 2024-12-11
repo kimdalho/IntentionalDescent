@@ -37,17 +37,27 @@ public class IDNetworkRoomManager : NetworkRoomManager
 
     //public override void OnHost
 
-    //GUI 스타트 버튼
-    public override void OnGUI()
+    //GUI 스타트 버튼 테스트
+    //public override void OnGUI()
+    //{
+    //    base.OnGUI();
+
+    //    if (allPlayersReady && showStartButton && GUI.Button(new Rect(150, 300, 120, 20), "START GAME"))
+    //    {
+    //        // set to false to hide it in the game scene
+    //        showStartButton = false;
+
+    //        ServerChangeScene(GameplayScene);
+    //    }
+    //}
+    
+    public void GameStart()
     {
-        base.OnGUI();
-
-        if (allPlayersReady && showStartButton && GUI.Button(new Rect(150, 300, 120, 20), "START GAME"))
+        if(allPlayersReady)
         {
-            // set to false to hide it in the game scene
             showStartButton = false;
-
             ServerChangeScene(GameplayScene);
         }
+        
     }
 }

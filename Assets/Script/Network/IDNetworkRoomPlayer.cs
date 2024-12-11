@@ -1,5 +1,7 @@
 using UnityEngine;
 using Mirror;
+using UnityEngine.Windows;
+using TMPro;
 public class IDNetworkRoomPlayer : NetworkRoomPlayer
 {
     //프로퍼티 역할 네트워크를 통해 동기화할 변수를 지정한다.
@@ -11,17 +13,23 @@ public class IDNetworkRoomPlayer : NetworkRoomPlayer
     [SyncVar(hook = nameof(ReadyTextChanged))]
     public string ReadyText;
 
+    //hook 프로퍼티 설명
+    //동기화될 데이터가 수정될 경우
+    //클라이언트에서 호출될 함수를 정의한다.
+    //해당 함수는 호스트 또한 호출된다.
+    [SyncVar(hook = nameof(ChatTextChanged))]
+    public string chatText;
+
+
     public override void Start()
     {
         base.Start();
 
         IDNetworkRoomManager roomManager = IDNetworkRoomManager.singleton as IDNetworkRoomManager;
         playerCard = Instantiate(roomManager.spawnPrefabs[0]);
-        var panel_RoomTransfrom = Panel_Room.Instance.transform;
+        var panel_RoomTransfrom = Panel_Room.Instance.panel_PlayerView.transform;
 
         playerCard.transform.SetParent(panel_RoomTransfrom, false);
-        NetworkServer.Spawn(playerCard);
-
         CmdChangeNickNameText(roomManager.playerName);
 
 
@@ -36,17 +44,29 @@ public class IDNetworkRoomPlayer : NetworkRoomPlayer
         }
 
     }
+    //Command 프로퍼티 설명
+    //클라이언트에서 커맨드 프로퍼티가 붙은 함수를 호출하면
+    //호스트에만 커맨드 프로퍼티가 붙은 함수를 처리한다.
+    //중요한건 클라이언트는 호스트에게 요청할 정보를 파라미터로 알려준다.
+
+    [Command]
+    public void PostChat(string chatPlayerName, string Text)
+    {
+        chatText =  $"{chatPlayerName} : {Text}";
+    }
+
+    private void ChatTextChanged(string oldText, string newText)
+    {
+        GameObject newBox = Instantiate(Panel_Room.Instance.chatBox);
+        newBox.GetComponent<ChatBox>().Setup();
+        newBox.GetComponent<ChatBox>().textMeshPro.text = newText;
+    }
+
 
 
     //hook
     //싱크바로 동기화된 변수가 서버에서 변경되었을때
     //클라이언트에서 호출되게하는 함수입니다.
-    
-    [Command]
-    public void CmdSendName(string playerName)
-    {
-        playerDisplayName = playerName;
-    }
 
     public override void OnClientExitRoom()
     {

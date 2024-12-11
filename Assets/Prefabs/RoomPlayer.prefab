@@ -48,9 +48,13 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  showRoomGUI: 1
+  showRoomGUI: 0
   readyToBegin: 0
   index: 0
+  playerDisplayName: 
+  playerCard: {fileID: 0}
+  ReadyText: 
+  chatText: 
 --- !u!114 &3545162999077550315
 MonoBehaviour:
   m_ObjectHideFlags: 0
