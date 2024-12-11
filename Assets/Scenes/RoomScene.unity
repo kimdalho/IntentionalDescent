@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 109e53c2c3f2c934d8eb4bc707e2622f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel_PlayerView: {fileID: 948006249}
+  panel_PlayerHolder: {fileID: 948006254}
   panel_RoomChat: {fileID: 59132105}
 --- !u!1 &453054250
 GameObject:
@@ -2107,8 +2107,9 @@ GameObject:
   - component: {fileID: 948006252}
   - component: {fileID: 948006251}
   - component: {fileID: 948006253}
+  - component: {fileID: 948006254}
   m_Layer: 5
-  m_Name: Panel_PlayerView
+  m_Name: Panel_PlayersHudHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2199,6 +2200,27 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &948006254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948006249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f0f9948028ecd94d997020fcd6207d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  holderTransforms:
+  - {fileID: 1193232277}
+  - {fileID: 867438954}
+  - {fileID: 258862114}
+  - {fileID: 994545812}
+  - {fileID: 536445435}
+  - {fileID: 1605138749}
+  - {fileID: 150441264}
+  - {fileID: 1943726095}
 --- !u!1 &991178831
 GameObject:
   m_ObjectHideFlags: 0
@@ -3722,7 +3744,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 672838841}
   m_HandleRect: {fileID: 672838840}
   m_Direction: 2
-  m_Value: 1.0000074
+  m_Value: 1.0000067
   m_Size: 0.8631
   m_NumberOfSteps: 0
   m_OnValueChanged:

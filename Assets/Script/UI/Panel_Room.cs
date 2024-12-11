@@ -4,7 +4,7 @@ public class Panel_Room : MonoBehaviour
 {
     public static Panel_Room Instance;
 
-    public GameObject panel_PlayerView;
+    public Panel_PlayersHudHolder panel_PlayerHolder;
     
     public IRoomChatService roomChatService;
 

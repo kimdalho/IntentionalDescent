@@ -1,6 +1,5 @@
 using UnityEngine;
 using Mirror;
-
 /// <summary>
 /// 
 /// </summary>
@@ -8,6 +7,8 @@ public class IDNetworkRoomManager : NetworkRoomManager
 {
 
     bool showStartButton;
+
+    //이렇게 써도 괜찮은가..
     public string playerName;
     public override void OnRoomServerPlayersReady()
     {
@@ -26,7 +27,23 @@ public class IDNetworkRoomManager : NetworkRoomManager
     public override void OnRoomServerConnect(NetworkConnectionToClient conn)
     {
         base.OnRoomServerConnect(conn);
+        //IDNetworkRoomPlayer roomPlayer = conn.identity.GetComponent<IDNetworkRoomPlayer>();
+        //roomPlayer.CreatePlayer();
     }
+
+    /// <summary>
+    /// 서버에서 호출되어 처리되고 클라와 동기화한다.
+    /// </summary>
+    /// <param name="conn"></param>
+    public override void OnRoomServerDisconnect(NetworkConnectionToClient conn)
+    {
+        base.OnRoomServerDisconnect(conn);
+
+        IDNetworkRoomPlayer roomPlayer = conn.identity.GetComponent<IDNetworkRoomPlayer>();
+        Destroy(roomPlayer.playerCard);
+    }
+
+
     public override void OnRoomClientSceneChanged()
     {
         base.OnRoomClientSceneChanged();

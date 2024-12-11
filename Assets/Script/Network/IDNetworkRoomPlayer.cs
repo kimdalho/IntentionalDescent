@@ -1,7 +1,8 @@
 using UnityEngine;
 using Mirror;
-using UnityEngine.Windows;
 using TMPro;
+using NUnit.Framework;
+using System.Collections.Generic;
 public class IDNetworkRoomPlayer : NetworkRoomPlayer
 {
     //프로퍼티 역할 네트워크를 통해 동기화할 변수를 지정한다.
@@ -20,30 +21,34 @@ public class IDNetworkRoomPlayer : NetworkRoomPlayer
     [SyncVar(hook = nameof(ChatTextChanged))]
     public string chatText;
 
+    private IDNetworkRoomManager roomManager;
 
     public override void Start()
     {
         base.Start();
+        CreatePlayer();
+    }
 
-        IDNetworkRoomManager roomManager = IDNetworkRoomManager.singleton as IDNetworkRoomManager;
+    
+    public void CreatePlayer()
+    {
+        roomManager = IDNetworkRoomManager.singleton as IDNetworkRoomManager;
         playerCard = Instantiate(roomManager.spawnPrefabs[0]);
-        var panel_RoomTransfrom = Panel_Room.Instance.panel_PlayerView.transform;
-
-        playerCard.transform.SetParent(panel_RoomTransfrom, false);
-        CmdChangeNickNameText(roomManager.playerName);
-
 
         foreach (NetworkRoomPlayer player in roomManager.roomSlots)
         {
-            if (player != null && player.isLocalPlayer == false)
+            if (player != null)
             {
-                var idPlayer = player as IDNetworkRoomPlayer;
-                var localPlayerView = idPlayer.playerCard.GetComponent<Panel_PlayerView>();
-                localPlayerView.Text_NickName.text = idPlayer.playerDisplayName;
+                var panel_RoomTransfrom = Panel_Room.Instance.panel_PlayerHolder.GetTransformByIndex(player.index);
+                playerCard.transform.SetParent(panel_RoomTransfrom, false);
             }
         }
 
+        CmdChangeNickNameText(roomManager.playerName);
     }
+
+
+
     //Command 프로퍼티 설명
     //클라이언트에서 커맨드 프로퍼티가 붙은 함수를 호출하면
     //호스트에만 커맨드 프로퍼티가 붙은 함수를 처리한다.
@@ -57,17 +62,17 @@ public class IDNetworkRoomPlayer : NetworkRoomPlayer
 
     private void ChatTextChanged(string oldText, string newText)
     {
-        //GameObject newBox = Instantiate(Panel_Room.Instance.chatBox);
-        //newBox.GetComponent<ChatBox>().Setup();
-        //newBox.GetComponent<ChatBox>().textMeshPro.text = newText;
         Panel_Room.Instance.roomChatService.SendChatMessage(newText);
     }
 
-    public override void OnClientExitRoom()
-    {
-        base.OnClientEnterRoom();
-        Destroy(playerCard);
-    }
+
+    //호스트에서만 호출된다.(Cmd)
+    //public override void OnClientExitRoom()
+    //{
+    //    base.OnClientEnterRoom();
+    //}
+
+
     [Command]
     public void CmdChangeNickNameText(string Text)
     {
@@ -87,6 +92,17 @@ public class IDNetworkRoomPlayer : NetworkRoomPlayer
     {
         var localPlayerView = playerCard.GetComponent<Panel_PlayerView>();
         localPlayerView.Text_NickName.text = newText;
+
+
+        foreach (NetworkRoomPlayer player in roomManager.roomSlots)
+        {
+            if (player != null && player.isLocalPlayer == false)
+            {
+                var idPlayer = player as IDNetworkRoomPlayer;
+                var OtherPlayerView = idPlayer.playerCard.GetComponent<Panel_PlayerView>();
+                OtherPlayerView.Text_NickName.text = idPlayer.playerDisplayName;
+            }
+        }
     }
 
     public void ReadyTextChanged(string oldText, string newText) 
